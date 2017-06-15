@@ -12,6 +12,7 @@ set(SOURCE_FILES
     row.h row.cpp
     datacontainer.h datacontainer.cpp
     table.h table.cpp
+    filemanager.h filemanager.cpp
     )
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries ("DiskNode" ${Boost_LIBRARIES})

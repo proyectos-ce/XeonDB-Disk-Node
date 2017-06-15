@@ -66,3 +66,13 @@ bool Row::validateColumn(int index)
     return result;
 
 }
+
+int Row::getIndex() const
+{
+    return index;
+}
+
+void Row::setIndex(int value)
+{
+    index = value;
+}

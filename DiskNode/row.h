@@ -14,9 +14,13 @@ public:
     int getColumnType(int index);
     bool insertColumn(std::string data, int type);
     std::string toString();
+    int getIndex() const;
+    void setIndex(int value);
+
 private:
     std::vector<DataContainer> contents;
     bool validateColumn(int index);
+    int index = -1;
 };
 
 #endif // ROW_H

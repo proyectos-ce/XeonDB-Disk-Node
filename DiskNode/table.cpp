@@ -3,14 +3,13 @@
 Table::Table()
 {
 
-
 }
 
 bool Table::insertColumn(std::string name, int type)
 {
     bool result = false;
-    if (!checkIfRowExists(name)){
-        rowsProperties.push_back(RowProperties(name, type));
+    if (!checkIfColumnExists(name)){
+        columnProperties.push_back(ColumnProperties(name, type));
         for (int i = 0; i < rows.size(); ++i) {
             rows[i].insertColumn(NULL, type);
         }
@@ -19,24 +18,79 @@ bool Table::insertColumn(std::string name, int type)
     return result;
 }
 
+bool Table::insertRow(Row row)
+{
+    rows.push_back(row);
+}
+
+bool Table::insertRow(std::vector<std::string> dataRow)
+{
+    bool result = false;
+    Row newRow;
+    if(dataRow.size() == columnProperties.size()){
+        for (int i = 0; i < dataRow.size(); ++i) {
+            newRow.insertColumn(dataRow[i], columnProperties[i].getType());
+        }
+    }
+    return result;
+}
+
+
+
 bool Table::removeRow(int index)
 {
     int result = false;
-    if(index < rowsProperties.size()){
+    if(index < columnProperties.size()){
 
     }
 }
 
-bool Table::checkIfRowExists(std::string name)
+Row Table::getRow(int index)
 {
-    return getRowIndex(name) != -1;
+    Row result;
+    if(index < rows.size()){
+        result = rows[index];
+        result.setIndex(index);
+    }
+    return result;
 }
 
-int Table::getRowIndex(std::string name)
+std::vector<Row> Table::getRows(std::vector<int> rowsIndexes)
 {
-    result = -1;
-    for (int i = 0; i < rowsProperties.size(); ++i) {
-        if(rowsProperties[i].getName() == name){
+    std::vector<Row> result;
+    for (int i = 0; i < rowsIndexes.size(); ++i) {
+        if(rowsIndexes[i]<rows.size()){
+            result.push_back(getRow(i));
+        }
+    }
+    return result;
+}
+
+bool Table::updateRow(Row row)
+{
+   rows[row.getIndex()] = row;
+}
+
+std::string Table::getName() const
+{
+    return name;
+}
+
+void Table::setName(const std::string &value)
+{
+    name = value;
+}
+
+bool Table::checkIfColumnExists(std::string name)
+{
+    return getColumnIndex(name) != -1;
+}
+
+int Table::getColumnIndex(std::string name)
+{
+    int result = -1;
+    for (int i = 0; i < columnProperties.size(); ++i) {
+        if(columnProperties[i].getName() == name){
             result = i;
             break;
         }
@@ -44,28 +98,28 @@ int Table::getRowIndex(std::string name)
     return result;
 }
 
-RowProperties::RowProperties(std::string name, int type)
+ColumnProperties::ColumnProperties(std::string name, int type)
 {
     this->name =name;
     this->type=type;
 }
 
-std::string RowProperties::getName() const
+std::string ColumnProperties::getName() const
 {
     return name;
 }
 
-void RowProperties::setName(const std::string &value)
+void ColumnProperties::setName(const std::string &value)
 {
     name = value;
 }
 
-int RowProperties::getType() const
+int ColumnProperties::getType() const
 {
     return type;
 }
 
-void RowProperties::setType(int value)
+void ColumnProperties::setType(int value)
 {
     type = value;
 }
