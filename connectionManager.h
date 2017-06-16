@@ -19,7 +19,7 @@ using json = nlohmann::json;
 
 class ConnectionManager {
 public:
-    ConnectionManager();
+    ConnectionManager(std::string ip, int port);
     void readFromSocket();
     void actFromJSONFile();
     void identify();

@@ -8,7 +8,7 @@
 #include <fstream>
 #include "connectionManager.h"
 
-ConnectionManager::ConnectionManager() {
+ConnectionManager::ConnectionManager(std::string ip, int port) {
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -19,10 +19,10 @@ ConnectionManager::ConnectionManager() {
     memset(&serv_addr, '0', sizeof(serv_addr));
 
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
+    serv_addr.sin_port = htons(port);
 
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)
+    if(inet_pton(AF_INET, ip.c_str(), &serv_addr.sin_addr)<=0)
     {
         printf("\nInvalid address/ Address not supported \n");
 
