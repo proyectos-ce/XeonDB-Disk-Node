@@ -10,7 +10,6 @@ endif()
 set(SOURCE_FILES
     main.cpp
     row.h row.cpp
-    datacontainer.h datacontainer.cpp
     table.h table.cpp
     filemanager.h filemanager.cpp
     )

@@ -20,7 +20,7 @@ Table FileManager::loadTableFromDisk(std::string filename)
         }
         cols = std::stoi(tableAttributes[0]);
         rows = std::stoi(tableAttributes[1]);
-        std::cout<<"cols: "<<cols<<"rows:  "<<rows<<"\n";
+        //std::cout<<"cols: "<<cols<<"rows:  "<<rows<<"\n";
 
         //std::vector<std::string> columNames;
         getline(txtFileStream,tempString,'\n');
