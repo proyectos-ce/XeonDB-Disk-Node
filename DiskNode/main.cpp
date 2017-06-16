@@ -1,11 +1,79 @@
 #include <boost/any.hpp>
 #include <iostream>
-#include "row.h"
+#include "table.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <list>
 #include <string>
+
+
+int main()
+{
+    Table myTable;
+    myTable.insertColumn("id", INT );
+    myTable.insertColumn("nombre", STRING );
+    myTable.insertColumn("altura", DOUBLE );
+    std::cout << myTable.toString();
+    Row newRow;
+    newRow.insertColumn("1");
+    newRow.insertColumn("Tavo");
+    newRow.insertColumn("170.1");
+    myTable.insertRow(newRow);
+    newRow.reset();
+    newRow.insertColumn("2");
+    newRow.insertColumn("Daniel");
+    newRow.insertColumn("170.2");
+    myTable.insertRow(newRow);
+    newRow.reset();
+    newRow.insertColumn("3");
+    newRow.insertColumn("Jimena");
+    newRow.insertColumn("170.3");
+    myTable.insertRow(newRow);
+    newRow.reset();
+    std::cout << myTable.toString()<<"\n";
+
+    myTable.removeColumn(1);
+    std::cout << myTable.toString()<<"\n";
+
+
+    myTable.removeRow(1);
+    std::cout << myTable.toString()<<"\n";
+
+
+
+
+}
+
+
+/*
+  boost::any a = 1;
+  std::cout << boost::any_cast<int>(a)<<" type:  " << a.type().name()<< '\n';
+  a = 3.14;
+  std::cout << boost::any_cast<double>(a) <<" type:  " << a.type().name()<< '\n';
+  a = true;
+  std::cout << std::boolalpha << boost::any_cast<bool>(a) <<" type:  " << a.type().name()<< '\n';
+
+  a = std::string{"Boost"};
+  std::cout<< boost::any_cast<std::string>(a) <<" type:  " << a.type().name()<< '\n';
+
+  Row myRow;
+  myRow.insertColumn("asdasd", STRING);
+  myRow.insertColumn("2", STRING);
+  myRow.insertColumn("3", INT);
+  myRow.insertColumn("4.45", DOUBLE);
+  std::cout<< myRow.toString()<<std::endl;
+
+  myRow.updateColumn(0,"casa1");
+  myRow.updateColumn(1,"casa2");
+  myRow.updateColumn(2,"casa3");
+  myRow.updateColumn(3,"casa4");
+  std::cout<< myRow.toString()<<std::endl;
+
+*/
+
+
+/*
 
 class Something
 {
@@ -61,40 +129,10 @@ int main()
     {
         // read was successful therefore s2 is valid
         std::cout << s2 << '\n'; // print s2 to console
-        int a[] = {1,2,3,4,5,6,7,8};
-        std::cout << a << '\n'; // print s2 to console
+        //int a[] = {1,2,3,4,5,6,7,8};
+        //std::cout << a << '\n'; // print s2 to console
     }
 
     return 0;
 }
-
-
-
-
-/*
-  boost::any a = 1;
-  std::cout << boost::any_cast<int>(a)<<" type:  " << a.type().name()<< '\n';
-  a = 3.14;
-  std::cout << boost::any_cast<double>(a) <<" type:  " << a.type().name()<< '\n';
-  a = true;
-  std::cout << std::boolalpha << boost::any_cast<bool>(a) <<" type:  " << a.type().name()<< '\n';
-
-  a = std::string{"Boost"};
-  std::cout<< boost::any_cast<std::string>(a) <<" type:  " << a.type().name()<< '\n';
-
-  Row myRow;
-  myRow.insertColumn("asdasd", STRING);
-  myRow.insertColumn("2", STRING);
-  myRow.insertColumn("3", INT);
-  myRow.insertColumn("4.45", DOUBLE);
-  std::cout<< myRow.toString()<<std::endl;
-
-  myRow.updateColumn(0,"casa1");
-  myRow.updateColumn(1,"casa2");
-  myRow.updateColumn(2,"casa3");
-  myRow.updateColumn(3,"casa4");
-  std::cout<< myRow.toString()<<std::endl;
-
-*/
-
-
+ */

@@ -5,15 +5,18 @@ Row::Row()
 
 }
 
-bool Row::updateColumn(int index, std::string data, int type)
+Row::Row(std::vector<std::string> row)
+{
+    for (const auto &column:row) {
+        insertColumn(column);
+    }
+}
+
+bool Row::updateColumn(int index, std::string data)
 {
     bool result = false;
     if(validateColumn(index)){
-
-        contents[index].setData(data);
-        if(type != -1){
-            contents[index].setType(type);
-        }
+        contents[index]=data;
         result = true;
 
     }
@@ -22,35 +25,30 @@ bool Row::updateColumn(int index, std::string data, int type)
 
 std::string Row::getColumn(int index)
 {
-
-}
-/*
-std::string &Row::operator[](int index)
-{
-    if(validateColumn(index)){
-        return contents[index].getData();
-    }
-}
-*/
-
-int Row::getColumnType(int index)
-{
-    if(validateColumn(index)){
-        return contents[index].getType();
-    }
+    return contents[index];
 }
 
-bool Row::insertColumn(std::string data, int type)
+bool Row::insertColumn(std::string data)
 {
-    contents.push_back(DataContainer(data,type));
+    contents.push_back(data);
     return true;
+}
+
+bool Row::deleteColumn(int index)
+{
+    int result = false;
+    if(index < contents.size()){
+        contents.erase(contents.begin()+index);
+        result = true;
+    }
+    return result;
 }
 
 std::string Row::toString()
 {
     std::string result= "";
     for (int i = 0; i < contents.size(); ++i) {
-        result.append("|" + contents[i].getData());
+        result.append("|" + contents[i]);
     }
     result.append("|");
     return result;
@@ -75,4 +73,15 @@ int Row::getIndex() const
 void Row::setIndex(int value)
 {
     index = value;
+}
+
+std::vector<std::string> Row::getContents() const
+{
+    return contents;
+}
+
+void Row::reset()
+{
+    index=-1;
+    contents.clear();
 }

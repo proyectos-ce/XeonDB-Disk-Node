@@ -34,13 +34,15 @@ public:
     bool insertRow(Row row);
     bool insertRow(std::vector<std::string> dataRow);
     //bool removeColumn(std::string name);
-    //bool removeColumn(int index);
+    bool removeColumn(int index);
     bool removeRow(int index);
     Row getRow(int index);
     std::vector<Row> getRows(std::vector<int> rowsIndexes);
     bool updateRow(Row row);
     std::string getName() const;
     void setName(const std::string &value);
+    std::vector<std::vector<std::string> > getTableAsMatrix();
+    std::string toString();
 
 private:
     std::string name;
@@ -51,6 +53,11 @@ private:
 
 };
 
+enum{
+    INT,
+    STRING,
+    DOUBLE
+};
 
 
 #endif // TABLE_H
