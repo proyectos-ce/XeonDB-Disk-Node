@@ -108,7 +108,7 @@ void Table::setName(const std::string &value)
 
 std::vector<std::vector<std::string> > Table::getTableAsMatrix()
 {
-    std::vector<std::vector<std::string>> result;
+    std::vector<std::vector< std::string> > result;
     std::vector<std::string> newRow;
     for(const ColumnProperties& property : columnProperties){
         newRow.push_back(property.getName());
