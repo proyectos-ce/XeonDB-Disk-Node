@@ -91,17 +91,7 @@ bool FileManager::saveTableToDisk(Table table)
 
 
     }
-    /*
-     *ofstream txtFileStream;
-    txtFileStream.open(txtFile);
-     int array[size];
-     fseek(binFile, sizeof(int)*0 ,SEEK_SET);
-     for (int i = 0; i < size; ++i) {
-         //fseek(binFile, sizeof(int)*i ,SEEK_SET);
-         fread( array, sizeof(int), 1, binFile);
-         txtFileStream<<to_string(array[0])<<" ,";
-     }
-*/
+
 }
 
 bool FileManager::existsOnDisk(std::string name)

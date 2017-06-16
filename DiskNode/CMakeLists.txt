@@ -9,7 +9,6 @@ endif()
 
 set(SOURCE_FILES
     main.cpp
-    row.h row.cpp
     table.h table.cpp
     filemanager.h filemanager.cpp
     )
