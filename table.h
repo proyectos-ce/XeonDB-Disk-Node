@@ -69,14 +69,11 @@ public:
     bool setColumnType(int index, int type);
     int getTotalRows()const;
     int getTotalColumns()const;
-
-
     std::vector<ColumnProperties> getColumnProperties() const;
     void setColumnProperties(const std::vector<ColumnProperties> &value);
-
     std::string getPrimaryKey() const;
     void setPrimaryKey(const std::string &value);
-
+    int getPrimaryKeyIndex();
 private:
     std::string name;
     std::string primaryKey;
