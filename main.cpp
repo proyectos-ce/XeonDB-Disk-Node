@@ -8,10 +8,16 @@
 #include <string>
 #include "filemanager.h"
 #include "connectionManager.h"
+#include "jsonutils.h"
+#include "JSON Library/json.hpp"
+using json = nlohmann::json;
 
 int main()
 {
-    ConnectionManager* myConnectionManager = new ConnectionManager();
+   // ConnectionManager* myConnectionManager = new ConnectionManager();
+
+
+    //myConnectionManager->
     Table myTable;
     myTable.insertColumn("id", INT );
     myTable.insertColumn("nombre", STRING );
@@ -33,18 +39,29 @@ int main()
     newRow.insertColumn("170.3");
     myTable.insertRow(newRow);
     newRow.reset();
-    std::cout << myTable.toString()<<"\n";
+    //std::cout << myTable.toString()<<"\n";
 
     myTable.removeColumn(1);
     std::cout << myTable.toString()<<"\n";
 
 
     myTable.removeRow(1);
-    std::cout << myTable.toString()<<"\n";
+    //std::cout << myTable.toString()<<"\n";
     Table loaded = FileManager::loadTableFromDisk("test");
     loaded.setName("saved");
+    std::cout<<"loaded: \n" << loaded.toString()<<"\n";
 
     FileManager::saveTableToDisk(loaded);
+    //std::cout<<"column p:  "<< loaded.getColumnProperties()[1].getName()<<"\n";
+    json jsonTable = JSONutils::tableToJson(loaded);
+    jsonTable["name"];
+    std::cout<<jsonTable.dump();
+    //std::cout<<JSONutils::jsonToTable(jsonTable).toString();
+
+
+    //JSONutils::test(1);
+    //std::vector<std::vector<std::string>> matriz = myTable.getTableAsMatrix();
+
 
 
 

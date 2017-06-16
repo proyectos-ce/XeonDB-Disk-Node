@@ -28,7 +28,7 @@ private:
     struct sockaddr_in address;
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char *hello = "Hello from client";
+    //char *hello = "Hello from client";
     char buffer[1024] = {0};
 
 };

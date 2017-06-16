@@ -13,6 +13,7 @@ set(SOURCE_FILES
         main.cpp
         table.h table.cpp
         filemanager.h filemanager.cpp
-        connectionManager.cpp connectionManager.h)
+        connectionManager.cpp connectionManager.h
+        jsonutils.h jsonutils.cpp)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries ("DiskNode" ${Boost_LIBRARIES})
