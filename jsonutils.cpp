@@ -25,6 +25,7 @@ json JSONutils::tableToJson(Table table)
     result["columnNames"]= columnNames;
     result["columnTypes"]= columnTypes;
     result["rows"]= rows;
+    result["primaryKey"]= table.getPrimaryKey();
     //std::cout<<"JSON:  " <<result.dump()<<std::endl;
     //json *result2 = new json;
     //result2 = result;
@@ -34,10 +35,9 @@ json JSONutils::tableToJson(Table table)
 Table JSONutils::jsonToTable(json inputJson)
 {
 
-    inputJson["name"]="jose";
-
     Table result;
     result.setName(inputJson["name"]);
+    result.setPrimaryKey(inputJson["primaryKey"]);
 
     for (int i = 0; i < inputJson["columnNames"].size(); i++) {
         result.insertColumn(inputJson["columnNames"][i],inputJson["columnTypes"][i] );

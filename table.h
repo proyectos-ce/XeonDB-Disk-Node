@@ -74,8 +74,12 @@ public:
     std::vector<ColumnProperties> getColumnProperties() const;
     void setColumnProperties(const std::vector<ColumnProperties> &value);
 
+    std::string getPrimaryKey() const;
+    void setPrimaryKey(const std::string &value);
+
 private:
     std::string name;
+    std::string primaryKey;
     std::vector<Row> rows;
     std::vector<ColumnProperties> columnProperties;
     bool checkIfColumnExists(std::string name);

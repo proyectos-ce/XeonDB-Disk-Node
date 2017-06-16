@@ -181,6 +181,21 @@ void Table::setColumnProperties(const std::vector<ColumnProperties> &value)
     columnProperties = value;
 }
 
+std::string Table::getPrimaryKey() const
+{
+    return primaryKey;
+}
+
+void Table::setPrimaryKey(const std::string &value)
+{
+    primaryKey = value;
+}
+
+int Table::getPrimaryKeyIndex()
+{
+    return getColumnIndex(primaryKey);
+}
+
 bool Table::checkIfColumnExists(std::string name)
 {
     return getColumnIndex(name) != -1;
