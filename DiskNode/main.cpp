@@ -40,7 +40,11 @@ int main()
     myTable.removeRow(1);
     std::cout << myTable.toString()<<"\n";
     FileManager myFilemanager;
-    myFilemanager.loadTableFromDisk("test");
+    Table loaded = myFilemanager.loadTableFromDisk("test");
+    loaded.setName("saved");
+
+    myFilemanager.saveTableToDisk(loaded);
+
 
 
 

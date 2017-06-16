@@ -8,11 +8,12 @@ FileManager::FileManager()
 Table FileManager::loadTableFromDisk(std::string filename)
 {
     Table result;
+    result.setName(filename);
     std::ifstream txtFileStream;
     filename.append(".table");
+    txtFileStream.open(filename);
     std::string tempString="999";
     int cols,rows;
-    txtFileStream.open(filename);
     if(txtFileStream.is_open()){
         getline(txtFileStream,tempString,'\n');
 
@@ -25,8 +26,6 @@ Table FileManager::loadTableFromDisk(std::string filename)
         cols = std::stoi(tableAttributes[0]);
         rows = std::stoi(tableAttributes[1]);
         std::cout<<"cols: "<<cols<<"rows:  "<<rows<<"\n";
-
-
 
         //std::vector<std::string> columNames;
         getline(txtFileStream,tempString,'\n');
@@ -59,42 +58,43 @@ Table FileManager::loadTableFromDisk(std::string filename)
     std::cout<<result.toString()<<std::endl;
     txtFileStream.close();
     return result;
-
-
-
-    /*
-ifstream txtFileStream;
-    txtFileStream.open(txtFile);
-    int array[2];
-    int size = 0;
-    string tempString="999";
-    while (getline(txtFileStream,tempString,',')){
-        //cout<<tempString<<"    ";
-       size++;
-    }
-    size--;
-    txtFileStream.close();
-
-    txtFileStream.open(txtFile);
-    int i=0;
-    for (int i = 0; i < size; ++i) {
-        getline(txtFileStream,tempString,',');
-        fseek(binFile, sizeof(int)*i ,SEEK_SET);
-        //cout<<"-"<<tempString<<"-";
-        array[0]=stoi(tempString);
-        fwrite(array , sizeof(int) , 1 , binFile );
-    }
-    return size;
-
-    */
-
 }
 
 bool FileManager::saveTableToDisk(Table table)
 {
+    std::ofstream txtFileStream;
+    std::string  filename= table.getName();
+    filename.append(".table");
+    remove( filename.c_str() );
+    txtFileStream.open(filename);
+    //txtFileStream.
+    std::string resultString= "";
+    if(txtFileStream.is_open()){
+        resultString.append(std::to_string(table.getTotalColumns()) + "|");
+        resultString.append(std::to_string(table.getTotalRows()) + "|");
+        resultString.append("\n");
+
+        for(const ColumnProperties &property : table.getColumnProperties()){
+            resultString.append(property.getName()+"|");
+        }
+        resultString.append("\n");
 
 
+        for(const ColumnProperties &property : table.getColumnProperties()){
+            resultString.append(std::to_string(property.getType())+"|");
+        }
+        resultString.append("\n");
 
+        for(const Row &row : table.getRows()){
+            for(const std::string &content : row.getContents()){
+            resultString.append(content+"|");
+            }
+            resultString.append("\n");
+        }
+    txtFileStream<<resultString;
+
+
+    }
     /*
      *ofstream txtFileStream;
     txtFileStream.open(txtFile);

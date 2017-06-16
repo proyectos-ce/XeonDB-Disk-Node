@@ -64,7 +64,7 @@ bool Table::removeRow(int index)
     return result;
 }
 
-Row Table::getRow(int index)
+Row Table::getRow(int index) const
 {
     Row result;
     if(index < rows.size()){
@@ -74,7 +74,7 @@ Row Table::getRow(int index)
     return result;
 }
 
-std::vector<Row> Table::getRows(std::vector<int> rowsIndexes)
+std::vector<Row> Table::getRows(std::vector<int> rowsIndexes) const
 {
     std::vector<Row> result;
     for (int i = 0; i < rowsIndexes.size(); ++i) {
@@ -84,6 +84,12 @@ std::vector<Row> Table::getRows(std::vector<int> rowsIndexes)
     }
     return result;
 }
+
+std::vector<Row> Table::getRows() const
+{
+    return rows;
+}
+
 
 bool Table::updateRow(Row row)
 {
@@ -149,6 +155,26 @@ bool Table::setColumnType(int index, int type)
         result= true;
     }
     return result;
+}
+
+int Table::getTotalRows() const
+{
+    return rows.size();
+}
+
+int Table::getTotalColumns() const
+{
+    return columnProperties.size();
+}
+
+std::vector<ColumnProperties> Table::getColumnProperties() const
+{
+    return columnProperties;
+}
+
+void Table::setColumnProperties(const std::vector<ColumnProperties> &value)
+{
+    columnProperties = value;
 }
 
 bool Table::checkIfColumnExists(std::string name)
