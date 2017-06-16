@@ -30,7 +30,7 @@ class Table
 {
 public:
     Table();
-    bool insertColumn(std::string name, int type);
+    bool insertColumn(std::string name, int type=-1);
     bool insertRow(Row row);
     bool insertRow(std::vector<std::string> dataRow);
     //bool removeColumn(std::string name);
@@ -43,6 +43,8 @@ public:
     void setName(const std::string &value);
     std::vector<std::vector<std::string> > getTableAsMatrix();
     std::string toString();
+    bool setColumnType(int index, int type);
+
 
 private:
     std::string name;

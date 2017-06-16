@@ -25,13 +25,17 @@ bool Table::insertRow(Row row)
 
 bool Table::insertRow(std::vector<std::string> dataRow)
 {
-    bool result = false;
+    bool result = true;
     Row newRow;
     if(dataRow.size() == columnProperties.size()){
         for (int i = 0; i < dataRow.size(); ++i) {
-            newRow.insertColumn(dataRow[i]);
+            if(!newRow.insertColumn(dataRow[i])){
+                //result = false;
+                return false;
+            }
         }
         this->insertRow(newRow);
+        //result = true;
     }
 
     return result;
@@ -133,6 +137,16 @@ std::string Table::toString()
         }
         result.append(newRow + "\n");
         newRow= " | ";
+    }
+    return result;
+}
+
+bool Table::setColumnType(int index, int type)
+{
+    bool result = false;
+    if(index<columnProperties.size()){
+        columnProperties[index].setType(type);
+        result= true;
     }
     return result;
 }

@@ -6,7 +6,7 @@
 #include <vector>
 #include <list>
 #include <string>
-
+#include "filemanager.h"
 
 int main()
 {
@@ -39,7 +39,8 @@ int main()
 
     myTable.removeRow(1);
     std::cout << myTable.toString()<<"\n";
-
+    FileManager myFilemanager;
+    myFilemanager.loadTableFromDisk("test");
 
 
 
