@@ -12,6 +12,7 @@
 #include <string.h>
 
 #include "JSON Library/json.hpp"
+#include "tableManager.h"
 
 #define PORT 8888
 
@@ -23,8 +24,10 @@ public:
     void readFromSocket();
     void actFromJSONFile();
     void identify();
+    bool createTable();
 
 private:
+    TableManager* tables;
     struct sockaddr_in address;
     int sock = 0, valread;
     struct sockaddr_in serv_addr;

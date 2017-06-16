@@ -10,6 +10,8 @@
 
 ConnectionManager::ConnectionManager(std::string ip, int port) {
 
+
+
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("\n Socket creation error \n");
@@ -57,6 +59,12 @@ void ConnectionManager::actFromJSONFile() {
     std::cout << j.dump() << std::endl;
     if (j["command"] == "identify_yourself"){
         identify();
+    } else if (j["command"] == "create_table"){
+        tables->addTable(j["table_name"]);
+        for (auto& element : j[""]){
+
+        }
+
     }
 
 }
@@ -67,4 +75,9 @@ void ConnectionManager::identify() {
     identityJSON["identity"] = "diskNode";
     std::string identityString = identityJSON.dump();
     send(sock, identityString.c_str(), identityString.size(), 0);
+}
+
+bool ConnectionManager::createTable() {
+
+    return false;
 }

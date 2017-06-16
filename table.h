@@ -51,6 +51,7 @@ class Table
 {
 public:
     Table();
+    Table(std::string name);
     bool insertColumn(std::string name, int type=-1);
     bool insertRow(Row row);
     bool insertRow(std::vector<std::string> dataRow);

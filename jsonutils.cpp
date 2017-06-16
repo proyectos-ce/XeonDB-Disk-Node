@@ -33,27 +33,19 @@ json JSONutils::tableToJson(Table table)
 
 Table JSONutils::jsonToTable(json inputJson)
 {
-    //std::vector<int> *test;
-    //test->operator []();
-    //std::cout <<"input: ------------------------------\n "<<inputJson.dump()<<"\n-------------------------------------------\n";
-    //json test;
-    //test = json::parse(inputJson);
+
     inputJson["name"]="jose";
-    //inputJson["name"].get<std::string>();
-    //json::get(test.);
+
     Table result;
-    //result.setName(inputJson.get()["name"]);
+    result.setName(inputJson["name"]);
 
-    //for (int i = 0; i < inputJson["columnNames"].size(); ++i) {
-    //    result.insertColumn(inputJson["columnNames"][i],inputJson["columnTypes"][i] );
-   //}
-    /*for (const auto &row : inputJson["rows"] ) {
+    for (int i = 0; i < inputJson["columnNames"].size(); i++) {
+        result.insertColumn(inputJson["columnNames"][i],inputJson["columnTypes"][i] );
+   }
+    for (const auto &row : inputJson["rows"] ) {
         std::vector<std::string> newRow = row;
-        //for(const auto &content : row){
-
-        //}
         result.insertRow(Row(newRow));
-    }*/
+    }
     return result;
 
 

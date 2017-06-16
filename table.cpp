@@ -5,6 +5,10 @@ Table::Table()
 
 }
 
+Table::Table(std::string name) {
+    this->name = name;
+}
+
 bool Table::insertColumn(std::string name, int type)
 {
     bool result = false;
@@ -193,6 +197,8 @@ int Table::getColumnIndex(std::string name)
     }
     return result;
 }
+
+
 
 ColumnProperties::ColumnProperties(std::string name, int type)
 {

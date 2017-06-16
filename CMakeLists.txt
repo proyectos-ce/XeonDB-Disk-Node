@@ -9,11 +9,7 @@ endif()
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES
-        main.cpp
-        table.h table.cpp
-        filemanager.h filemanager.cpp
-        connectionManager.cpp connectionManager.h
-        jsonutils.h jsonutils.cpp)
+set(SOURCE_FILES main.cpp table.h table.cpp filemanager.h filemanager.cpp connectionManager.cpp connectionManager.h
+        jsonutils.h jsonutils.cpp tableManager.cpp tableManager.h)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries ("DiskNode" ${Boost_LIBRARIES})
