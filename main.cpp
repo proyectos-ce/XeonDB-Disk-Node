@@ -7,9 +7,11 @@
 #include <list>
 #include <string>
 #include "filemanager.h"
+#include "connectionManager.h"
 
 int main()
 {
+    ConnectionManager* myConnectionManager = new ConnectionManager();
     Table myTable;
     myTable.insertColumn("id", INT );
     myTable.insertColumn("nombre", STRING );
