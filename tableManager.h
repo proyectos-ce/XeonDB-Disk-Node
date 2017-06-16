@@ -14,7 +14,6 @@ class TableManager {
 public:
     TableManager();
     Table* getTable(std::string name);
-    Row* getRowFromTable(std::string name, int row);
     bool addTable(std::string name);
 
 private:
