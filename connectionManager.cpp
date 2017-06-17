@@ -9,7 +9,7 @@
 #include "connectionManager.h"
 
 ConnectionManager::ConnectionManager(std::string ip, int port) {
-
+    tables = new TableManager();
 
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -34,17 +34,16 @@ ConnectionManager::ConnectionManager(std::string ip, int port) {
     {
         printf("\nConnection Failed \n");
     }
-    readFromSocket();
-//    send(sock , hello , strlen(hello) , 0 );
-    printf("Hello message sent\n");
-    valread = read( sock , buffer, 1024);
-    printf("%s\n",buffer );
+    while (true) {
+        readFromSocket();
+    }
 }
 
 void ConnectionManager::readFromSocket() {
-    valread = read(sock, buffer, 1024);
+    valread = read(sock, buffer, 1024*10);
     buffer[valread] = '\0';
-    std::ofstream jsonFile("myFile.json");
+    remove("myFile.json");
+    std::ofstream jsonFile("myFile.json", std::ofstream::trunc);
     jsonFile << buffer;
     jsonFile.close();
     actFromJSONFile();
@@ -60,11 +59,37 @@ void ConnectionManager::actFromJSONFile() {
     if (j["command"] == "identify_yourself"){
         identify();
     } else if (j["command"] == "create_table"){
-        tables->addTable(j["table_name"]);
-        for (auto& element : j[""]){
-
+        if(tables->addTable(JSONutils::jsonToTable(j))){
+            std::cout << tables->getTable(j["name"]).toString() << std::endl;
+        } else{
+            std::cout << "srry, couldnt create table" << std::endl;
         }
 
+    } else if (j["command"] == "update_table"){
+        if (tables->exists(j["name"])){
+            int i;
+            for (i = 0; i < tables->tableList.size(); i++){
+                if (tables->tableList[i].getName() == j["name"]) {
+                    tables->tableList[i] = JSONutils::jsonToTable(j);
+                    std::cout << tables->tableList[i].toString() << std::endl;
+                }
+            }
+        }
+    } else if (j["command"] == "get_table"){
+        sendTable(j["name"]);
+    } else if (j["command"] == "drop_table"){
+        tables->deleteTable(j["name"]);
+
+    }else if(j["command"] == "delete_table"){
+        if (tables->exists(j["name"])){
+            int i;
+            for (i = 0; i < tables->tableList.size(); i++){
+                if (tables->tableList[i].getName() == j["name"]) {
+                    tables->tableList[i] = JSONutils::jsonToTable(j);
+                    std::cout << tables->tableList[i].toString() << std::endl;
+                }
+            }
+        }
     }
 
 }
@@ -77,7 +102,17 @@ void ConnectionManager::identify() {
     send(sock, identityString.c_str(), identityString.size(), 0);
 }
 
-bool ConnectionManager::createTable() {
+void ConnectionManager::sendTable(std::string name) {
+    json answer;
+    if (!tables->exists(name)){
+        answer["command"] = "answer_from_diskNode";
+        answer["found"] = false;
+    } else{
+        answer = JSONutils::tableToJson(tables->getTable(name));
+    }
+    std::string answerString = answer.dump();
+    send(sock, answerString.c_str(), answerString.size(), 0);
 
-    return false;
+
 }
+

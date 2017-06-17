@@ -5,6 +5,8 @@
 json JSONutils::tableToJson(Table table)
 {
     json result;
+    result["command"] = "answer";
+    result["found"] = true;
     result["name"] =  table.getName();
     json rows;
     for(const Row &row : table.getRows()) {
@@ -34,7 +36,6 @@ json JSONutils::tableToJson(Table table)
 
 Table JSONutils::jsonToTable(json inputJson)
 {
-
     Table result;
     result.setName(inputJson["name"]);
     result.setPrimaryKey(inputJson["primaryKey"]);

@@ -13,12 +13,14 @@
 class TableManager {
 public:
     TableManager();
-    Table* getTable(std::string name);
-    Row* getRowFromTable(std::string name, int row);
-    bool addTable(std::string name);
+    Table getTable(std::string name);
+    bool exists(std::string name);
+    bool addTable(Table table);
+    std::vector<Table> tableList;
+    int deleteTable(std::string name);
 
 private:
-    std::vector<Table*> tableList;
+
 
 };
 
