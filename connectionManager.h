@@ -33,7 +33,7 @@ private:
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
     //char *hello = "Hello from client";
-    char buffer[1024] = {0};
+    char buffer[1024*10] = {0};
 
 };
 

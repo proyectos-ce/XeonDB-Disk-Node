@@ -14,9 +14,10 @@ class TableManager {
 public:
     TableManager();
     Table getTable(std::string name);
-    bool isTable(std::string name);
+    bool exists(std::string name);
     bool addTable(Table table);
     std::vector<Table> tableList;
+    int deleteTable(std::string name);
 
 private:
 
