@@ -14,7 +14,7 @@ using json = nlohmann::json;
 
 int main()
 {
-   // ConnectionManager* myConnectionManager = new ConnectionManager();
+    ConnectionManager* myConnectionManager = new ConnectionManager("127.0.0.1", 8888);
 
 
     //myConnectionManager->

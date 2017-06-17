@@ -13,6 +13,7 @@
 
 #include "JSON Library/json.hpp"
 #include "tableManager.h"
+#include "jsonutils.h"
 
 #define PORT 8888
 
@@ -24,7 +25,7 @@ public:
     void readFromSocket();
     void actFromJSONFile();
     void identify();
-    bool createTable();
+    void sendTable(std::string name);
 
 private:
     TableManager* tables;
